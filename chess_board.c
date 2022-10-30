@@ -60,15 +60,19 @@ void initialize(chess board[][SIZE]){
 	set_chess(&board[7][7],ROOK,BLUE);
 }
 
-bool clear_path(chess board[][SIZE],coord st,coord ed,short n){
+bool clear_path(chess board[][SIZE],coord st,coord ed){
 	bool ans=true;
 	coord tmp=minus(ed,st);
-	tmp=devide(tmp,n);
+	short len=MAX(abs(tmp.x),abs(tmp.y));
+	tmp=devide(tmp,len);
 	//printf("tmp: %d,%d\n",tmp.x,tmp.y);
 	int i;
-	for(i=1;i<=n;i++){
-		if(board[tmp.y*i+st.y][tmp.x*i+st.x].type!=EMPTY){
+	for(i=1;i<=len;i++){
+		if(board[tmp.y*i+st.y][tmp.x*i+st.x].color==board[st.y][st.x].color){
 			//printf("type= %d\n",board[tmp.y*i+st.y][tmp.x*i+st.x].type);
+			ans=false;
+			break;
+		}else if(board[tmp.y*i+st.y][tmp.x*i+st.x].color==!board[st.y][st.x].color && i!=len){
 			ans=false;
 			break;
 		}
@@ -81,8 +85,8 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 	coord r_pos=minus(end,start);
 	r_pos.y*=inv;
 	bool ans=false;
-	//printf("r_pos: %d,%d\n",r_pos.x,r_pos.y);
 	if ( end.x>=0 && end.x<SIZE && end.y>=0 && end.y<SIZE && board[end.y][end.x].color!=board[start.y][start.x].color && board[start.y][start.x].color==player){
+		
 		switch(board[start.y][start.x].type){
 			case EMPTY:
 				break;
@@ -93,14 +97,12 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 				break;
 			case ROOK:
 				if(r_pos.x*r_pos.y==0){
-					short len=abs(r_pos.x+r_pos.y);
-					ans=clear_path(board,start,end,len);
+					ans=clear_path(board,start,end);
 				}
 				break;
 			case DRAGON:
 				if(r_pos.x*r_pos.y==0){
-					short len=abs(r_pos.x+r_pos.y);
-					ans=clear_path(board,start,end,len);
+					ans=clear_path(board,start,end);
 				}else if(abs(r_pos.x*r_pos.y)==1){
 					ans=true;
 				}
@@ -108,15 +110,13 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 				
 			case BISHOP:
 				if(abs(r_pos.x)==abs(r_pos.y)){
-					short len=abs(r_pos.x/r_pos.y);
-					ans=clear_path(board,start,end,len);
+					ans=clear_path(board,start,end);
 				}
 				break;
 				
 			case HORSE:
 				if(abs(r_pos.x)==abs(r_pos.y)){
-					short len=abs(r_pos.x/r_pos.y);
-					ans=clear_path(board,start,end,len);
+					ans=clear_path(board,start,end);
 				}else if(abs(r_pos.x+r_pos.y)==1 && r_pos.x*r_pos.y==0){
 					ans=true;
 				}
@@ -153,7 +153,7 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 				
 			case LANCE:
 				if(r_pos.y<0 && r_pos.x==0){
-					ans=clear_path(board,start,end,r_pos.y);
+					ans=clear_path(board,start,end);
 				}
 				break;
 				
@@ -177,24 +177,27 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 			default:
 				break;
 		}
-	}else{
+	}
+	/*else{
 		printf("invalid move\n");
 		//printf("end %d %d\n",end.x,end.y);
 		//printf("start %d %d",start.x,start.y);
 		//printf("Out of boarder %d\n",board[end.y][end.x].color!=board[start.y][start.x].color);
 		//printf("color st: %d, color ed: %d\n",board[start.y][start.x].color,board[end.y][end.x].color);
 		//printf("type st: %d, type ed: %d\n",board[start.y][start.x].type,board[end.y][end.x].type);
-	}
+	}*/
 	return ans;
 }
 
 void move_chess(chess board[][SIZE],coord start,coord end){
+	//printf("end %d %d\n",end.x,end.y);
+	//printf("start %d %d\n",start.x,start.y);
 	set_chess(&board[end.y][end.x],board[start.y][start.x].type,board[start.y][start.x].color);
 	set_chess(&board[start.y][start.x],EMPTY,BLACK);
 }
 
 bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player){
-	if(type!=KING && type!=GOLD){
+	if(type==ROOK || type==BISHOP || type==SILVER || type==KNIGHT || type==LANCE || type==PAWN){
 		if ((player==BLUE && (start.y<=2 || end.y<=2)) || (player==RED && (start.y>=6 || end.y>=6) ) ){
 			return true;
 		}
@@ -204,4 +207,14 @@ bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player){
 
 void promote(chess board[][SIZE],coord position){
 	board[position.y][position.x].type+=1;
+}
+
+void regret(chess board[][SIZE],step back,COLOR player){
+	if(back.promote){
+		board[back.end.y][back.end.x].type-=1;
+	}
+	move_chess(board,back.end,back.start);
+	if(back.capture!=EMPTY){
+		set_chess(&board[back.end.y][back.end.x],back.capture,!player);	
+	}	
 }

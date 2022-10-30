@@ -17,7 +17,7 @@ void push(stack *st,step data){
 step pop(stack *st){
 	step data;
 	if(isEmpty(st)){
-		printf("stack is empty\n");
+		//printf("stack is empty\n");
 	}else{
 		data=st->content[st->top];
 		st->top--;
@@ -31,6 +31,7 @@ void print_stack(stack *st){
 		coord start=st->content[i].start;
 		coord end=st->content[i].end;
 		bool prom=st->content[i].promote;
-		printf("start: %d,%d end: %d,%d promote: %d\n",start.x,start.y,end.x,end.y,prom);
+		short cap=st->content[i].capture;
+		printf("start: %d,%d end: %d,%d promote: %d capture %d\n",start.x,start.y,end.x,end.y,prom,cap);
 	}
 }

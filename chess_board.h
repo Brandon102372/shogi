@@ -3,6 +3,7 @@
 
 #define SIZE 9
 #include "coord.h"
+#include "step.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -20,10 +21,11 @@ typedef struct chess_pice{
 void set_chess(chess*target,CHESS_TYPE type,COLOR color);
 void show(chess board[][SIZE]);
 void initialize(chess board[][SIZE]);
-bool clear_path(chess board[][SIZE],coord st,coord ed,short n);
+bool clear_path(chess board[][SIZE],coord st,coord ed);
 bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player);
 void move_chess(chess board[][SIZE],coord start,coord end);
 bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player);
 void promote(chess board[][SIZE],coord position);
+void regret(chess board[][SIZE],step back,COLOR player);
 #endif
 
