@@ -23,7 +23,7 @@ void show(chess board[][SIZE]);
 void initialize(chess board[][SIZE]);
 bool clear_path(chess board[][SIZE],coord st,coord ed);
 bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player);
-void move_chess(chess board[][SIZE],coord start,coord end);
+void move_chess(chess board[][SIZE],coord start,coord end,short promote);
 bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player);
 void promote(chess board[][SIZE],coord position);
 void regret(chess board[][SIZE],step back,COLOR player);

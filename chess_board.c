@@ -189,10 +189,10 @@ bool valid_move(chess board[][SIZE],coord start,coord end,COLOR player){
 	return ans;
 }
 
-void move_chess(chess board[][SIZE],coord start,coord end){
+void move_chess(chess board[][SIZE],coord start,coord end,short promote){
 	//printf("end %d %d\n",end.x,end.y);
 	//printf("start %d %d\n",start.x,start.y);
-	set_chess(&board[end.y][end.x],board[start.y][start.x].type,board[start.y][start.x].color);
+	set_chess(&board[end.y][end.x],board[start.y][start.x].type+promote,board[start.y][start.x].color);
 	set_chess(&board[start.y][start.x],EMPTY,BLACK);
 }
 
@@ -205,15 +205,9 @@ bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player){
 	return false;	
 }
 
-void promote(chess board[][SIZE],coord position){
-	board[position.y][position.x].type+=1;
-}
 
 void regret(chess board[][SIZE],step back,COLOR player){
-	if(back.promote){
-		board[back.end.y][back.end.x].type-=1;
-	}
-	move_chess(board,back.end,back.start);
+	move_chess(board,back.end,back.start,-1*back.promote);
 	if(back.capture!=EMPTY){
 		set_chess(&board[back.end.y][back.end.x],back.capture,!player);	
 	}	
