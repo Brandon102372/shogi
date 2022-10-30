@@ -50,9 +50,9 @@ void initialize(chess board[][SIZE]){
 		set_chess(&board[col][7],KNIGHT,color);
 		set_chess(&board[col][8],LANCE,color);
 		
-		/*for (j=0;j<9;j++){
+		for (j=0;j<9;j++){
 			set_chess(&board[abs(col-2)][j],PAWN,color);
-		}*/
+		}
 	}
 	set_chess(&board[1][7],BISHOP,RED);
 	set_chess(&board[1][1],ROOK,RED);
