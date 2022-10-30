@@ -13,7 +13,6 @@ void write_file(const stack *st,const char *name){
 		printf("Error! opening file\n");
    	}else{
    		printf("Saving file.......\r");
-   		printf("top = %d",st->top);
 		int i;
 		step data;
 		for(i=0;i<=st->top;i++){
@@ -37,7 +36,7 @@ void read_file(stack *st,const char *name){
 	strcat(file_name,".bin");
 	
 	if ((fptr = fopen(file_name,"r")) == NULL){
-		printf("Error! opening file\n");
+		printf("File not found !\n");
 	}else{
 		printf("Loading...\r");
 		step read;
@@ -46,11 +45,11 @@ void read_file(stack *st,const char *name){
 			push(st,read);
 		}
 		pop(st);
-		int i;
+		/*int i;
 		for(i=0;i<=st->top;i++){
 			read=st->content[i];
 			printf("start %d,%d end %d,%d promote %d capture %d\n",read.start.x,read.start.y,read.end.x,read.end.y,read.promote,read.capture);
-		}
+		}*/
 		printf("Sucessfully load the file!\n");
 	}
 	fclose(fptr);
