@@ -68,7 +68,10 @@ int main(int argc, char *argv[]) {
 					regret(board,now,player);
 					player=!player;
 					show(board);
-				}else{
+				}else if(input_str[0]=='q'){
+					break;
+				}
+				else{
 					printf("invalid\n");
 				}
 			}
@@ -86,6 +89,8 @@ int main(int argc, char *argv[]) {
 					turn-=1;
 					show(board);
 					//print_stack(&record);
+				}else if(input_str[0] =='q'){
+					break;
 				}else{
 					get_move(&start,&end,input_str);
 					//printf("end %d %d\n",end.x,end.y);
@@ -102,9 +107,13 @@ int main(int argc, char *argv[]) {
 						move_chess(board,start,end,check_promote);
 						step now={.start=start,.end=end,.promote=check_promote,.capture=capture};
 						push(&record,now);
+						show(board);
+						if(capture==KING){
+							printf("Player %d wins \n",player);
+							break;
+						}
 						turn+=1;
 						player = !player;
-						show(board);
 						//print_stack(&record);
 					}else{
 						printf("invalid input !\n");
