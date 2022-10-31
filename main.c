@@ -6,6 +6,8 @@
 #include "chess_board.h"
 #include "coord.h"
 #include "stack.h"
+#include "file_processing.h" 
+#define INPUT_SIZE 7
 
 chess board[SIZE][SIZE];
 stack record={.top=-1};
@@ -25,7 +27,7 @@ int main(int argc, char *argv[]) {
 	int turn=-1;
 	COLOR player=BLUE;
 	MODE current;
-	char input_str[6];
+	char input_str[INPUT_SIZE];
 	char file_name[30];
 	char arguments;
 	while((arguments=getopt(argc,argv,"ns:l:"))!=-1){
@@ -50,7 +52,7 @@ int main(int argc, char *argv[]) {
 			read_file(&record,file_name);
 			while(true){
 				printf("foward=f , back=b : ");
-				scanf(" %s",&input_str);
+				scanf(" %s",input_str);
 				step now;
 				if(input_str[0]=='f' && turn<record.top){
 					turn+=1;
@@ -74,7 +76,7 @@ int main(int argc, char *argv[]) {
 		case NEW:
 			while(true){
 				printf("player %d : ",player);
-				gets(input_str);
+				fgets(input_str,INPUT_SIZE,stdin);
 				if(input_str[0] == 's'){
 					write_file(&record,file_name);
 				}else if(input_str[0] =='0' && turn >0){
@@ -94,7 +96,7 @@ int main(int argc, char *argv[]) {
 				
 						if(can_promote(board[start.y][start.x].type,start,end,player)){
 							printf("Do you want to promote %s ? Yes:1 No:0 :",chess_name[board[start.y][start.x].type]);
-							gets(input_str);
+							fgets(input_str,INPUT_SIZE,stdin);
 							if(input_str[0]=='1')check_promote=true;
 						}
 						move_chess(board,start,end,check_promote);
@@ -105,7 +107,7 @@ int main(int argc, char *argv[]) {
 						show(board);
 						//print_stack(&record);
 					}else{
-						printf("invalid! \n");
+						printf("invalid input !\n");
 					}
 				}
 			}
