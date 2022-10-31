@@ -11,12 +11,14 @@ void show(chess board[][SIZE]){
 	for(i=0;i<SIZE;i++){
 		for(j=0;j<SIZE;j++){
 			printf("│");
-			printf(" %s",chess_name[board[i][j].type]);
-			/*if (board[i][j].color==RED){
-				printf("\033[31m %s \033[m",chess_name[board[i][j].type]);
+			//printf(" %s",chess_name[board[i][j].type]);
+			if (board[i][j].color==RED){
+				printf("\033[31m %s\033[m",chess_name[board[i][j].type]);
 			}else if (board[i][j].color==BLUE){
-				printf("%s",chess_name[board[i][j].type]);
-			}*/
+				printf("\033[36m %s\033[m",chess_name[board[i][j].type]);
+			}else{
+				printf(" %s",chess_name[board[i][j].type]);
+			}
 		}
 		printf("│ %d\n",i+1); 
 		if(i!=SIZE-1){
@@ -209,6 +211,6 @@ bool can_promote(CHESS_TYPE type,coord start,coord end,COLOR player){
 void regret(chess board[][SIZE],step back,COLOR player){
 	move_chess(board,back.end,back.start,-1*back.promote);
 	if(back.capture!=EMPTY){
-		set_chess(&board[back.end.y][back.end.x],back.capture,!player);	
+		set_chess(&board[back.end.y][back.end.x],back.capture,player);	
 	}	
 }

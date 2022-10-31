@@ -60,6 +60,7 @@ int main(int argc, char *argv[]) {
 					//printf("start %d,%d end %d,%d promote %d capture %d\n",now.start.x,now.start.y,now.end.x,now.end.y,now.promote,now.capture);
 					move_chess(board,now.start,now.end,now.promote);
 					player=!player;
+					system("clear");
 					show(board);
 				}else if(input_str[0]=='b' && turn>=0){
 					now=record.content[turn];
@@ -67,6 +68,7 @@ int main(int argc, char *argv[]) {
 					turn-=1;
 					regret(board,now,player);
 					player=!player;
+					system("clear");
 					show(board);
 				}else if(input_str[0]=='q'){
 					break;
@@ -82,11 +84,12 @@ int main(int argc, char *argv[]) {
 				fgets(input_str,INPUT_SIZE,stdin);
 				if(input_str[0] == 's'){
 					write_file(&record,file_name);
-				}else if(input_str[0] =='0' && turn >0){
+				}else if(input_str[0] =='0' && turn >=0){
 					step back = pop(&record);
 					regret(board,back,player);
 					player = !player;
 					turn-=1;
+					system("clear");
 					show(board);
 					//print_stack(&record);
 				}else if(input_str[0] =='q'){
@@ -107,6 +110,7 @@ int main(int argc, char *argv[]) {
 						move_chess(board,start,end,check_promote);
 						step now={.start=start,.end=end,.promote=check_promote,.capture=capture};
 						push(&record,now);
+						system("clear");
 						show(board);
 						if(capture==KING){
 							printf("Player %d wins \n",player);
