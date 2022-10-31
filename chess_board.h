@@ -11,7 +11,7 @@
 
 typedef enum {BLUE,RED,BLACK}COLOR;
 typedef enum {KING,ROOK,DRAGON,BISHOP,HORSE,GOLD,SILVER,PRO_SILVER,KNIGHT,PRO_KNIGHT,LANCE,PRO_LANCE,PAWN,PRO_PAWN,EMPTY}CHESS_TYPE;
-static const char *chess_name[]={"¤ı","­¸","Às","¨¤","°¨","ª÷","»È","¥ş","®Û","¦c","­»","§ö","¨B","¤¶","  "}; 
+static const char *chess_name[]={"ç‹","é£›","é¾","è§’","é¦¬","é‡‘","éŠ€","å…¨","æ¡‚","åœ­","é¦™","æ","æ­¥","ä»‹","  "}; 
 
 typedef struct chess_pice{
 	CHESS_TYPE type;

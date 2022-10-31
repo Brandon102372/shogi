@@ -7,10 +7,10 @@
 void show(chess board[][SIZE]){
 	int i,j;
 	printf("   9   8   7   6   5   4   3   2   1\n");
-	printf("¢z¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢s¢w¢w¢w¢{\n");
+	printf("â”Œâ”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”¬â”€â”€â”€â”\n");
 	for(i=0;i<SIZE;i++){
 		for(j=0;j<SIZE;j++){
-			printf("¢x");
+			printf("â”‚");
 			printf(" %s",chess_name[board[i][j].type]);
 			/*if (board[i][j].color==RED){
 				printf("\033[31m %s \033[m",chess_name[board[i][j].type]);
@@ -18,12 +18,12 @@ void show(chess board[][SIZE]){
 				printf("%s",chess_name[board[i][j].type]);
 			}*/
 		}
-		printf("¢x %d\n",i+1); 
+		printf("â”‚ %d\n",i+1); 
 		if(i!=SIZE-1){
-			printf("¢u¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢q¢w¢w¢w¢t\n");	
+			printf("â”œâ”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¼â”€â”€â”€â”¤\n");	
 		}
 	}
-	printf("¢|¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢r¢w¢w¢w¢}\n");
+	printf("â””â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”´â”€â”€â”€â”˜\n");
 }
 
 void set_chess(chess *target,CHESS_TYPE type,COLOR color){
