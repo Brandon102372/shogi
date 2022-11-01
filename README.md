@@ -4,7 +4,7 @@
 # Compile
 Use the following command to compile all the file
 ```bash
-gcc chess_board.h chess_board.c coord.c coord.h     file_processing.h file_processing.c main.c stack.c stack.h step.h
+gcc chess_board.h chess_board.c coord.c coord.h file_processing.h file_processing.c main.c stack.c stack.h step.h
 ```
 # Usage
 ## Start new game
@@ -14,16 +14,16 @@ gcc chess_board.h chess_board.c coord.c coord.h     file_processing.h file_proce
 ```
 * -n: start new game
 * -s file_name: game record will be saved as "file_name.bin"
-2. When the game starts, the input should meet the following format
+2. When the game starts, the input should meet the following format:
 * 's' for saving the game
 * 'q' for quitting the game
 * '0' for taking a move back
-* Input the coordinate of the chess pice you want to move and input the destination of that chess pice
+* Input the coordinate of the chess pice you want to move and input the destination of that chess pice  
 The following example move the chess pice from "row 8, col 3" to "row 8,col 4":
 ```
 83 84
 ```
-The program will check if the move if valid, if not the program will output "invalid input !"
+The program will check if the move if valid, if not the program will output "invalid input !".
 The player then have to enter their action again
 
 If the chess pice can be promoted after the move the player can choose to promote or not
