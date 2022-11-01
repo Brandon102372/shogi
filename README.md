@@ -1,4 +1,6 @@
 # Shogi
+目前剩下計時功能  
+(希望助教能給我多一點時間完成，預計11/1晚上12:00前完成)  
 # Compile
 Use the following command to compile all the file
 ```bash
@@ -40,7 +42,4 @@ The game will end when one of the king is captured
 * 'f' for moving to next step
 * 'b' for moving to previous step
 * 'q' for quitting 
-
-目前剩下計時功能
-(希望助教能給我多一點時間完成，預計11/1晚上12:00前完成)  
 
