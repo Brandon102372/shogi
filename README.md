@@ -1,6 +1,6 @@
 # Shogi
 # Compile
-Use the following command to compile all the file
+Use the following command to compile all the files
 ```bash
 gcc chess_board.h chess_board.c coord.c coord.h file_processing.h file_processing.c main.c stack.c stack.h step.h
 ```
